@@ -20,13 +20,6 @@ This repository contains advanced examples of AutoGen agents that can:
 - **FileSurfer Agent**: Manages file operations and Excel creation
 - **Intelligent Coordination**: Seamless collaboration between agents for complex tasks
 
-### 📊 Excel Integration & Analytics
-
-- **Automated Excel Generation**: Creates professionally formatted Excel files with multiple worksheets
-- **Structured Data Export**: Organizes search results into tables with proper formatting
-- **Comparative Analysis**: Generates side-by-side comparisons between different platforms
-- **Scoring Systems**: Implements custom scoring algorithms for course evaluation
-- **Dashboard Creation**: Builds executive summary dashboards for quick insights
 
 ### 🔍 Advanced Search Capabilities
 
@@ -34,37 +27,6 @@ This repository contains advanced examples of AutoGen agents that can:
 - **Targeted Queries**: Specialized search for AI Agent training courses and resources
 - **Content Analysis**: Extracts key information including pricing, ratings, difficulty levels
 - **Metadata Collection**: Captures comprehensive course details and technical specifications
-
-## 📁 Project Structure
-
-```
-AI-Agent-Basic-Sample/
-├── 🎯 Core Web Search Files
-│   ├── agentchat_web_google_search_updated.py  # Main Excel-integrated search agent
-│   ├── agentchat_web_google_search copy.py     # Original agent implementation  
-│   ├── 5-agentchat_web_training_search.py      # Training-focused search demo
-│   └── agentchat_web.py                        # Basic web browsing agent
-│
-├── 📊 Excel & Analytics
-│   ├── demo_excel_features.py                  # Excel functionality demonstration
-│   ├── EXCEL_UPDATE_GUIDE.md                   # Excel integration guide
-│   └── search_results/                         # Output directory for Excel files
-│
-├── 🚀 Quick Start Scripts
-│   ├── start_excel_search.bat                  # Windows batch launcher
-│   ├── start_web.bat / start_web.ps1           # Web agent launchers
-│   └── run_demo.ps1                            # PowerShell demo script
-│
-├── 🎤 Voice & Additional Features
-│   ├── start_weather_voice.bat/.ps1            # Voice-enabled weather agent
-│   ├── speech_requirements.txt                 # Voice feature dependencies
-│   └── README_Voice.md                         # Voice features documentation
-│
-└── 📚 Documentation & Config
-    ├── README_web_agent.md                     # Web agent detailed guide
-    ├── web_requirements.txt                    # Web agent dependencies
-    └── templates/                              # Agent templates and examples
-```
 
 ## 🛠️ Installation & Setup
 
@@ -90,15 +52,6 @@ pip install pandas openpyxl
 ```
 
 ## 🎮 Quick Start Guide
-
-### 1. Excel-Integrated Search (Recommended)
-```bash
-# Windows
-start_excel_search.bat
-
-# Or run directly
-python agentchat_web_google_search_updated.py
-```
 
 ### 2. Basic Web Search
 ```bash
@@ -136,9 +89,6 @@ await targeted_search(
     additional_instructions="Focus on beginner-friendly content"
 )
 ```
-
-## 📊 Excel Output Features
-
 ### Multi-Sheet Workbooks
 Each search generates comprehensive Excel files with:
 
@@ -240,53 +190,6 @@ agent_team = MagenticOneGroupChat([web_surfer_agent, file_surfer_agent])
 - **Automation**: Scheduled searches and updates
 
 ## JSON Mode
-
-In [JSON mode](https://platform.openai.com/docs/guides/text-generation/json-mode), the model generates outputs exclusively formatted as valid JSON strings. However, you need to explicitly specify the desired JSON structure within the system prompt to guide the model towards the expected format.
-
-Here's an example of using JSON mode:
-
-```python
-query = "Hi there, I have a question about my bill. Can you help me?"
-
-messages = [
-    {
-        "role": "system",
-        "content": """
-        You're a helpful customer care assistant that can classify incoming messages and create a response.
-        Always response in the following JSON format: {"content": <response>, "category": <classification>}
-        Available categories: 'general', 'order', 'billing'
-        """,
-    },
-    {
-        "role": "user",
-        "content": query,
-    },
-]
-
-response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=messages,
-    response_format={"type": "json_object"},
-)
-message = response.choices[0].message.content
-
-type(message)  # str
-
-message_json = json.loads(message)
-type(message_json)  # dict
-```
-
-It's important to note that OpenAI does not guarantee that the output text will have your specified JSON format. It only ensures that the output will be a valid string that can be parsed to JSON.
-
-### API Reference
-
-- `response_format`: An object specifying the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models newer than gpt-3.5-turbo-1106. Setting to `{"type": "json_object"}` enables JSON mode, which guarantees the message the model generates is valid JSON.
-
-Important: When using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## 📄 License
 
